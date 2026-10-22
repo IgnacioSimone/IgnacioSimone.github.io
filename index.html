@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ignacio Simone Sánchez · Business Intelligence</title>
+  <meta name="description" content="Analista de Business Intelligence e Ingeniero en Software. Power BI, SQL, Databricks y Azure Data Factory. Creador de PBI Layer." />
+  <meta name="theme-color" content="#0e0f0f" />
+  <meta property="og:title" content="Ignacio Simone Sánchez · Business Intelligence" />
+  <meta property="og:description" content="Power BI, SQL y modelado de datos para decidir mejor. Creador de PBI Layer, herramienta open source para documentar modelos de Power BI." />
+  <meta property="og:image" content="https://ignaciosimone.github.io/assets/pbi-layer-256.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ================= Pantalla de carga ================= -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__mark">
+      <svg viewBox="0 0 128 128" width="56" height="56"><use href="#layers-mark" /></svg>
+    </div>
+    <div class="loader__count"><span id="loader-count">0</span>%</div>
+  </div>
+
+  <!-- Símbolo reutilizable: tres capas (el mismo motivo que el ícono de PBI Layer) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="bar-shade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FFFFFF" />
+        <stop offset=".52" stop-color="#F5F2E8" />
+        <stop offset="1" stop-color="#918D7F" />
+      </linearGradient>
+      <symbol id="layers-mark" viewBox="0 0 128 128">
+        <path d="m24 41 40-21 40 21-40 21-40-21Z" fill="#F6C944" />
+        <path d="m24 51 40 21 40-21v12L64 84 24 63V51Z" fill="#D9A71E" />
+        <path d="m24 70 40 21 40-21v12l-40 21-40-21V70Z" fill="#F6C944" />
+        <path d="M34 72V58l10 5.25v14L34 72Z" fill="url(#bar-shade)" />
+        <path d="M49 80V56l10 5.25v24L49 80Z" fill="url(#bar-shade)" />
+        <path d="M64 88V50l10-5.25v38L64 88Z" fill="url(#bar-shade)" />
+        <path d="M79 80V56l10-5.25v24L79 80Z" fill="url(#bar-shade)" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= Navegación ================= -->
+  <header class="nav">
+    <a class="nav__brand" href="#top" aria-label="Inicio">
+      <svg viewBox="0 0 128 128" width="28" height="28"><use href="#layers-mark" /></svg>
+      <span>Ignacio Simone</span>
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#perfil" data-i18n="nav.profile">Perfil</a>
+      <a href="#experiencia" data-i18n="nav.experience">Experiencia</a>
+      <a href="#proyecto" data-i18n="nav.project">Proyecto</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="lang" type="button" aria-label="Cambiar idioma / Change language">
+        <span data-lang="es">ES</span><span class="lang__sep">/</span><span data-lang="en">EN</span>
+      </button>
+      <a class="btn btn--small" href="https://www.linkedin.com/in/ignacio-simones%C3%A1nchez" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="nav__progress" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= Hero: las capas se separan al hacer scroll ================= -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__pin">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="dot"></span><span data-i18n="hero.eyebrow">Córdoba, Argentina · Business Intelligence</span></p>
+          <h1 id="hero-title" class="hero__title">
+            <span class="line"><span data-i18n="hero.t1">Datos que se</span></span>
+            <span class="line"><span data-i18n="hero.t2">convierten en</span></span>
+            <span class="line"><em data-i18n="hero.t3">decisiones.</em></span>
+          </h1>
+          <p class="hero__sub">
+            <strong>Ignacio Simone Sánchez</strong> — <span data-i18n="hero.sub">Analista de BI e Ingeniero en Software. Diseño dashboards en Power BI, modelos de datos y procesos que llevan la información de la fuente a la decisión.</span>
+          </p>
+          <div class="hero__cta">
+            <a class="btn" href="#proyecto" data-i18n="hero.cta1">Ver proyecto destacado</a>
+            <a class="btn btn--ghost" href="#contacto" data-i18n="hero.cta2">Contacto</a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <svg class="stack" viewBox="0 0 520 560">
+            <defs>
+              <linearGradient id="glow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#F6C944" stop-opacity=".35" />
+                <stop offset="1" stop-color="#F6C944" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="260" cy="470" rx="200" ry="34" fill="url(#glow)" class="stack__shadow" />
+            <!-- Capa inferior: Datos -->
+            <g class="stack__layer stack__layer--1">
+              <path d="M60 330 260 225l200 105-200 105-200-105Z" fill="#F6C944" />
+              <path d="M60 330v26l200 105 200-105v-26L260 435 60 330Z" fill="#B88A12" />
+              <g class="stack__grid" stroke="#121313" stroke-opacity=".18" stroke-width="1.5">
+                <path d="M110 304 310 409M160 278 360 383M210 251 410 356" />
+                <path d="M410 304 210 409M360 278 160 383M310 251 110 356" />
+              </g>
+            </g>
+            <!-- Capa media: Modelo -->
+            <g class="stack__layer stack__layer--2">
+              <path d="M60 250 260 145l200 105-200 105-200-105Z" fill="#D9A71E" />
+              <path d="M60 250v26l200 105 200-105v-26L260 355 60 250Z" fill="#9C740E" />
+              <g class="stack__nodes">
+                <circle cx="260" cy="250" r="12" fill="#121313" />
+                <circle cx="175" cy="226" r="8" fill="#121313" fill-opacity=".75" />
+                <circle cx="345" cy="226" r="8" fill="#121313" fill-opacity=".75" />
+                <circle cx="205" cy="290" r="8" fill="#121313" fill-opacity=".75" />
+                <circle cx="315" cy="290" r="8" fill="#121313" fill-opacity=".75" />
+                <path d="M260 250 175 226M260 250 345 226M260 250 205 290M260 250 315 290" stroke="#121313" stroke-opacity=".55" stroke-width="3" />
+              </g>
+            </g>
+            <!-- Capa superior: Reporte (barras) -->
+            <g class="stack__layer stack__layer--3">
+              <path d="M60 170 260 65l200 105-200 105-200-105Z" fill="#F6C944" />
+              <path d="M60 170v26l200 105 200-105v-26L260 275 60 170Z" fill="#B88A12" />
+              <g class="stack__bars">
+                <path class="bar" d="M150 178v-46l28 14.7v46L150 178Z" fill="url(#bar-shade)" />
+                <path class="bar" d="M195 202v-78l28 14.7v78L195 202Z" fill="url(#bar-shade)" />
+                <path class="bar" d="M240 224v-118l28-14.7v118L240 224Z" fill="url(#bar-shade)" />
+                <path class="bar" d="M290 200v-82l28-14.7v82L290 200Z" fill="url(#bar-shade)" />
+                <path class="bar" d="M335 176v-52l28-14.7v52L335 176Z" fill="url(#bar-shade)" />
+              </g>
+            </g>
+          </svg>
+          <ul class="stack__labels">
+            <li class="stack__label stack__label--3"><span>03</span><b data-i18n="layers.report">Reporte</b><i data-i18n="layers.reportD">dashboards y KPIs</i></li>
+            <li class="stack__label stack__label--2"><span>02</span><b data-i18n="layers.model">Modelo</b><i data-i18n="layers.modelD">DAX y relaciones</i></li>
+            <li class="stack__label stack__label--1"><span>01</span><b data-i18n="layers.data">Datos</b><i data-i18n="layers.dataD">SQL, ETL y pipelines</i></li>
+          </ul>
+        </div>
+
+        <a class="scroll-cue" href="#perfil" aria-label="Bajar">
+          <span data-i18n="hero.scroll">Scroll</span>
+          <i></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= Cinta ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Power BI</span><b>·</b><span>DAX</span><b>·</b><span>SQL</span><b>·</b><span>Oracle PL/SQL</span><b>·</b>
+        <span>Databricks</span><b>·</b><span>Azure Data Factory</span><b>·</b><span>Data Warehouse</span><b>·</b><span>ETL / ELT</span><b>·</b>
+        <span>Power BI</span><b>·</b><span>DAX</span><b>·</b><span>SQL</span><b>·</b><span>Oracle PL/SQL</span><b>·</b>
+        <span>Databricks</span><b>·</b><span>Azure Data Factory</span><b>·</b><span>Data Warehouse</span><b>·</b><span>ETL / ELT</span><b>·</b>
+      </div>
+    </div>
+
+    <!-- ================= 001 Perfil ================= -->
+    <section id="perfil" class="section profile">
+      <p class="index"><span>001</span><span data-i18n="profile.kicker">Perfil</span></p>
+      <p class="profile__statement reveal-words" data-i18n="profile.statement">
+        Combino ingeniería de software y análisis de datos para construir soluciones de BI que la gente realmente usa: modelos sólidos, dashboards claros y procesos automatizados que liberan tiempo para pensar.
+      </p>
+      <div class="stats">
+        <div class="stat"><b class="count" data-from="2010" data-to="2023">2023</b><span data-i18n="stats.since">trabajando con datos desde</span></div>
+        <div class="stat"><b class="count" data-to="4">0</b><span data-i18n="stats.sources">tipos de fuentes integradas</span></div>
+        <div class="stat"><b class="count" data-to="2">0</b><span data-i18n="stats.degrees">títulos en software</span></div>
+        <div class="stat"><b class="count" data-to="1">0</b><span data-i18n="stats.oss">app open source publicada</span></div>
+      </div>
+    </section>
+
+    <!-- ================= 002 Experiencia ================= -->
+    <section id="experiencia" class="section experience">
+      <div class="experience__aside">
+        <p class="index"><span>002</span><span data-i18n="exp.kicker">Experiencia</span></p>
+        <h2 class="h2" data-i18n="exp.title">De la consulta SQL al tablero que se usa todos los días.</h2>
+      </div>
+      <ol class="timeline">
+        <li class="job reveal">
+          <p class="job__when" data-i18n="exp.job1.when">2024 — Actualidad</p>
+          <h3 class="job__role" data-i18n="exp.job1.role">Analista de Business Intelligence</h3>
+          <ul class="job__points">
+            <li data-i18n="exp.job1.p1">Dashboards en Power BI con los KPIs clave para seguir la performance del negocio.</li>
+            <li data-i18n="exp.job1.p2">Relevamiento de requerimientos con referentes de negocio para diseñar soluciones analíticas.</li>
+            <li data-i18n="exp.job1.p3">Consultas SQL y procedimientos almacenados en Oracle (PL/SQL) para procesar y transformar datos.</li>
+            <li data-i18n="exp.job1.p4">Actualizaciones automatizadas con Jobs: menos intervención manual y datos disponibles a tiempo.</li>
+            <li data-i18n="exp.job1.p5">Integración de Oracle, SQL Server, Databricks y el Data Warehouse corporativo en reportes multi-área.</li>
+            <li data-i18n="exp.job1.p6">Pipelines en Azure Data Factory para integrar y transformar datos entre plataformas.</li>
+          </ul>
+          <p class="chips"><span>Power BI</span><span>Oracle PL/SQL</span><span>SQL Server</span><span>Databricks</span><span>Azure Data Factory</span></p>
+        </li>
+        <li class="job reveal">
+          <p class="job__when">2023 — 2024</p>
+          <h3 class="job__role" data-i18n="exp.job2.role">Pasantía en Inteligencia y Planning</h3>
+          <p class="job__org">Universidad Siglo 21</p>
+          <ul class="job__points">
+            <li data-i18n="exp.job2.p1">Dashboards en Power BI y análisis de datos para seguir indicadores clave del negocio.</li>
+            <li data-i18n="exp.job2.p2">Extracción y análisis con SQL para reportes y métricas de performance.</li>
+          </ul>
+          <p class="chips"><span>Power BI</span><span>SQL</span><span>KPIs</span></p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= 003 Proyecto: PBI Layer (sección fijada que cambia con el scroll) ================= -->
+    <section id="proyecto" class="project" aria-labelledby="project-title">
+      <div class="project__pin">
+        <div class="project__copy">
+          <p class="index"><span>003</span><span data-i18n="project.kicker">Proyecto destacado</span></p>
+          <h2 id="project-title" class="project__title">
+            <svg viewBox="0 0 128 128" width="54" height="54" aria-hidden="true"><use href="#layers-mark" /></svg>
+            PBI Layer
+          </h2>
+          <p class="project__lead" data-i18n="project.lead">Aplicación de escritorio open source que documenta cualquier modelo de Power BI en segundos. La diseñé y desarrollé de punta a punta.</p>
+
+          <ol class="steps">
+            <li class="step is-active" data-step="0">
+              <b data-i18n="project.s1">Todo el modelo, de un vistazo</b>
+              <span data-i18n="project.s1d">Se conecta al tablero abierto en Power BI Desktop y reúne medidas DAX, tablas, columnas y Power Query.</span>
+            </li>
+            <li class="step" data-step="1">
+              <b data-i18n="project.s2">Mapa de relaciones</b>
+              <span data-i18n="project.s2d">Las tablas como un mapa: cardinalidad, dirección del filtro y relaciones inactivas.</span>
+            </li>
+            <li class="step" data-step="2">
+              <b data-i18n="project.s3">Uso y limpieza</b>
+              <span data-i18n="project.s3d">Detecta medidas, columnas y consultas que nada usa, cruzando visuales, fórmulas y relaciones.</span>
+            </li>
+            <li class="step" data-step="3">
+              <b data-i18n="project.s4">Documentación lista para compartir</b>
+              <span data-i18n="project.s4d">Exporta a Word, Excel, HTML y un Markdown para analizar el modelo con IA. Solo metadata, nunca datos.</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Maqueta de la app (dibujada con HTML: nítida en cualquier pantalla y sin datos reales) -->
+        <div class="app" aria-hidden="true">
+          <div class="app__bar"><i></i><i></i><i></i><span>PBI Layer</span></div>
+          <div class="app__body">
+            <aside class="app__side">
+              <b class="is-on"></b><b></b><b></b><b></b><b></b><b></b><b></b>
+            </aside>
+            <div class="app__screens">
+              <!-- 0 · Resumen -->
+              <div class="screen screen--0 is-active">
+                <p class="screen__title" data-i18n="mock.summary">Resumen</p>
+                <div class="tiles">
+                  <div class="tile"><b>16</b><span data-i18n="mock.tables">Tablas</span></div>
+                  <div class="tile"><b>342</b><span data-i18n="mock.columns">Columnas</span></div>
+                  <div class="tile"><b>70</b><span data-i18n="mock.measures">Medidas DAX</span></div>
+                  <div class="tile"><b>19</b><span data-i18n="mock.rels">Relaciones</span></div>
+                  <div class="tile"><b>22</b><span>Power Query</span></div>
+                  <div class="tile"><b>6</b><span data-i18n="mock.pages">Páginas</span></div>
+                </div>
+              </div>
+              <!-- 1 · Mapa -->
+              <div class="screen screen--1">
+                <p class="screen__title" data-i18n="mock.map">Mapa de relaciones</p>
+                <svg class="map" viewBox="0 0 420 240">
+                  <g class="map__edges">
+                    <path d="M210 120 90 50" /><path d="M210 120 330 50" /><path d="M210 120 70 175" />
+                    <path d="M210 120 350 180" /><path d="M210 120 210 215" /><path class="dashed" d="M90 50 70 175" />
+                  </g>
+                  <g class="map__nodes">
+                    <rect x="160" y="105" width="100" height="30" rx="7" class="hub" /><text x="210" y="124">Ventas</text>
+                    <rect x="45" y="35" width="90" height="30" rx="7" /><text x="90" y="54" data-i18n="mock.customers">Clientes</text>
+                    <rect x="285" y="35" width="90" height="30" rx="7" /><text x="330" y="54" data-i18n="mock.products">Productos</text>
+                    <rect x="25" y="160" width="90" height="30" rx="7" /><text x="70" y="179" data-i18n="mock.dates">Fechas</text>
+                    <rect x="305" y="165" width="90" height="30" rx="7" /><text x="350" y="184" data-i18n="mock.stores">Tiendas</text>
+                    <rect x="165" y="200" width="90" height="30" rx="7" /><text x="210" y="219" data-i18n="mock.region">Regiones</text>
+                  </g>
+                </svg>
+              </div>
+              <!-- 2 · Uso y limpieza -->
+              <div class="screen screen--2">
+                <p class="screen__title" data-i18n="mock.usage">Uso y limpieza</p>
+                <div class="rows">
+                  <div class="row"><span>Medida</span><b>Total Ventas</b><em class="ok" data-i18n="mock.inuse">En uso</em></div>
+                  <div class="row"><span>Medida</span><b>Margen %</b><em class="ok" data-i18n="mock.inuse">En uso</em></div>
+                  <div class="row"><span>Columna</span><b>Clientes[Fax]</b><em class="bad" data-i18n="mock.unused">Sin uso</em></div>
+                  <div class="row"><span>Medida</span><b>Ventas LY (v2)</b><em class="bad" data-i18n="mock.unused">Sin uso</em></div>
+                  <div class="row"><span>Consulta</span><b>Staging_Old</b><em class="bad" data-i18n="mock.unused">Sin uso</em></div>
+                  <div class="row"><span>Medida</span><b>Ticket promedio</b><em class="warn" data-i18n="mock.internal">Uso interno</em></div>
+                </div>
+              </div>
+              <!-- 3 · Exportar -->
+              <div class="screen screen--3">
+                <p class="screen__title" data-i18n="mock.export">Exportar</p>
+                <div class="files">
+                  <div class="file"><i>W</i><span>Word</span></div>
+                  <div class="file"><i>X</i><span>Excel</span></div>
+                  <div class="file"><i>&lt;/&gt;</i><span>HTML</span></div>
+                  <div class="file file--ai"><i>MD</i><span data-i18n="mock.ai">Contexto IA</span></div>
+                </div>
+                <p class="privacy"><span>🔒</span><span data-i18n="mock.privacy">Solo metadata · correos, DNI y claves enmascarados</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project__facts">
+        <div class="fact reveal"><b>C# · .NET 8 · WPF</b><span data-i18n="project.f1">Aplicación nativa de Windows con arquitectura MVVM</span></div>
+        <div class="fact reveal"><b class="count" data-to="234">0</b><span data-i18n="project.f2">tests automatizados y CI en GitHub Actions</span></div>
+        <div class="fact reveal"><b>ES · EN</b><span data-i18n="project.f3">interfaz bilingüe, tema claro y oscuro</span></div>
+        <div class="fact reveal"><b>MIT</b><span data-i18n="project.f4">código abierto, con instalador y actualizaciones verificadas</span></div>
+        <div class="project__links reveal">
+          <a class="btn" href="https://github.com/IgnacioSimone/PBILayer" target="_blank" rel="noopener" data-i18n="project.code">Ver en GitHub</a>
+          <a class="btn btn--ghost" href="https://github.com/IgnacioSimone/PBILayer/releases/latest" target="_blank" rel="noopener" data-i18n="project.download">Descargar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 004 Stack ================= -->
+    <section id="stack" class="section stack-section">
+      <p class="index"><span>004</span><span data-i18n="stack.kicker">Stack</span></p>
+      <h2 class="h2 reveal" data-i18n="stack.title">Herramientas con las que trabajo.</h2>
+      <div class="skills">
+        <div class="skill reveal">
+          <p class="skill__group" data-i18n="stack.g1">Visualización y modelado</p>
+          <p class="chips"><span>Power BI</span><span>DAX</span><span data-i18n="stack.modeling">Modelado de datos</span><span>KPIs</span><span>Dashboards</span></p>
+        </div>
+        <div class="skill reveal">
+          <p class="skill__group" data-i18n="stack.g2">Datos y bases</p>
+          <p class="chips"><span data-i18n="stack.sql">SQL avanzado</span><span>Oracle PL/SQL</span><span>SQL Server</span><span>Data Warehouse</span><span>ETL / ELT</span></p>
+        </div>
+        <div class="skill reveal">
+          <p class="skill__group" data-i18n="stack.g3">Cloud y automatización</p>
+          <p class="chips"><span>Databricks</span><span>Azure Data Factory</span><span>Jobs</span><span data-i18n="stack.ai">IA generativa aplicada</span></p>
+        </div>
+        <div class="skill reveal">
+          <p class="skill__group" data-i18n="stack.g4">Desarrollo y método</p>
+          <p class="chips"><span>C# / .NET</span><span>Git &amp; GitHub</span><span>Scrum</span><span>Jira</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 005 Formación ================= -->
+    <section class="section education">
+      <p class="index"><span>005</span><span data-i18n="edu.kicker">Formación</span></p>
+      <div class="cards">
+        <article class="card reveal">
+          <p class="card__year">2026</p>
+          <h3 data-i18n="edu.d1">Ingeniería en Software</h3>
+          <p>Universidad Siglo 21</p>
+        </article>
+        <article class="card reveal">
+          <p class="card__year">2023</p>
+          <h3 data-i18n="edu.d2">Analista en Software</h3>
+          <p>Universidad Siglo 21</p>
+        </article>
+        <article class="card card--soft reveal">
+          <p class="card__year">2025</p>
+          <h3 data-i18n="edu.c2">Inteligencia Artificial aplicada al trabajo</h3>
+          <p>Aithor.co</p>
+        </article>
+        <article class="card card--soft reveal">
+          <p class="card__year">2024</p>
+          <h3 data-i18n="edu.c1">Power BI Avanzado</h3>
+          <p>ECA</p>
+        </article>
+      </div>
+      <p class="langs reveal"><span data-i18n="edu.langs">Idiomas</span> — <span data-i18n="edu.langsD">Español nativo · Inglés básico, en mejora continua</span></p>
+    </section>
+
+    <!-- ================= Contacto ================= -->
+    <section id="contacto" class="contact">
+      <p class="index"><span>006</span><span data-i18n="contact.kicker">Contacto</span></p>
+      <h2 class="contact__title"><span class="line"><span data-i18n="contact.title">Hablemos.</span></span></h2>
+      <p class="contact__text reveal" data-i18n="contact.text">¿Un proyecto de datos, una oportunidad o una idea para PBI Layer? Escribime.</p>
+      <div class="contact__links reveal">
+        <a class="btn" href="mailto:nachil184@gmail.com">nachil184@gmail.com</a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/ignacio-simones%C3%A1nchez" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn--ghost" href="https://github.com/IgnacioSimone" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Ignacio Simone Sánchez</span>
+    <span data-i18n="footer.made">Hecho a mano con HTML, CSS y JavaScript</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="i18n.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
