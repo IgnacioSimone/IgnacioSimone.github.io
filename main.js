@@ -73,12 +73,13 @@
   /* ---------------- Pantalla de carga e intro ---------------- */
   const counter = { v: 0 };
   const loaderCount = document.getElementById("loader-count");
+  const loaderBar = document.getElementById("loader-bar");
   gsap.set(".hero__title .line > *", { yPercent: 115 });
   gsap.set([".hero .eyebrow", ".hero__sub", ".hero__cta", ".scroll-cue"], { autoAlpha: 0, y: 24 });
   gsap.set(".stack__layer", { autoAlpha: 0, y: -60 });
 
   const intro = gsap.timeline({ paused: true })
-    .to(".loader", { yPercent: -100, duration: .9, ease: "expo.inOut" })
+    .to(".loader", { autoAlpha: 0, duration: .6, ease: "power2.out" })
     .to(".hero__title .line > *", { yPercent: 0, duration: 1.1, ease: "expo.out", stagger: .09 }, "-=.35")
     .to(".stack__layer", { autoAlpha: 1, y: 0, duration: 1, ease: "back.out(1.4)", stagger: { each: .14, from: "end" } }, "<.1")
     .to([".hero .eyebrow", ".hero__sub", ".hero__cta", ".scroll-cue"], { autoAlpha: 1, y: 0, duration: .8, ease: "power3.out", stagger: .08 }, "<.2")
@@ -86,7 +87,7 @@
 
   gsap.to(counter, {
     v: 100, duration: 1.3, ease: "power2.inOut",
-    onUpdate: () => { loaderCount.textContent = Math.round(counter.v); },
+    onUpdate: () => { loaderCount.textContent = Math.round(counter.v); loaderBar.style.width = counter.v + "%"; },
     onComplete: () => intro.play()
   });
 
@@ -143,6 +144,12 @@
       onToggle: self => { clearInterval(timer); if (self.isActive) timer = setInterval(cycle, 2600); }
     });
     return () => clearInterval(timer);
+  });
+
+  /* ---------------- El proyecto se abre con un círculo que crece ---------------- */
+  gsap.fromTo(".project", { clipPath: "circle(0% at 50% 50%)" }, {
+    clipPath: "circle(150% at 50% 50%)", ease: "none",
+    scrollTrigger: { trigger: ".project", start: "top bottom", end: "top 15%", scrub: true }
   });
 
   /* ---------------- Cinta infinita (acelera con el scroll) ---------------- */
@@ -224,11 +231,15 @@
     const bar = document.querySelector(".nav__progress span");
     const links = [...document.querySelectorAll(".nav__links a")];
     const sections = links.map(l => document.querySelector(l.getAttribute("href")));
+    const darkZones = [...document.querySelectorAll(".bleed-dark, .project, .contact, .footer")];
 
     const onScroll = () => {
       const y = window.scrollY;
       const max = document.documentElement.scrollHeight - window.innerHeight;
       nav.classList.toggle("is-scrolled", y > 40);
+      // El menú cambia de color según el fondo que tiene debajo (claro u oscuro).
+      const probe = 40;
+      nav.classList.toggle("on-dark", darkZones.some(z => { const r = z.getBoundingClientRect(); return r.top <= probe && r.bottom >= probe; }));
       bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
       let current = -1;
       sections.forEach((s, i) => { if (s && s.getBoundingClientRect().top < window.innerHeight * .4) current = i; });

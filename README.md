@@ -8,6 +8,7 @@ Portfolio personal de **Ignacio Simone Sánchez** — Analista de Business Intel
 
 - HTML, CSS y JavaScript sin herramientas de compilación: se publica tal cual con GitHub Pages.
 - Animaciones de scroll con [GSAP](https://gsap.com) + ScrollTrigger y scroll suave con [Lenis](https://lenis.darkroom.engineering).
+- Tipografía editorial: [Fraunces](https://fonts.google.com/specimen/Fraunces) para títulos e [Inter](https://fonts.google.com/specimen/Inter) para texto.
 - Gráficos en SVG y maqueta de la app en HTML: nítidos en cualquier pantalla, sin imágenes pesadas.
 - Español e inglés (`i18n.js`), y respeta la preferencia del sistema de reducir animaciones.
 
